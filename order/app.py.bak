@@ -1,0 +1,29 @@
+from flask import Flask, request, jsonify
+import mysql.connector
+
+app = Flask(__name__)
+
+# Connect to MySQL database
+cnx = mysql.connector.connect(
+    user='root',
+    password='password',
+    host='mysql-service',
+    database='orders'
+)
+cursor = cnx.cursor()
+
+@app.route('/orders', methods=['GET'])
+def get_orders():
+    cursor.execute("SELECT * FROM orders")
+    orders = cursor.fetchall()
+    return jsonify([dict(order) for order in orders])
+
+@app.route('/orders', methods=['POST'])
+def create_order():
+    data = request.get_json()
+    cursor.execute("INSERT INTO orders (name, quantity) VALUES (%s, %s)", (data['name'], data['quantity']))
+    cnx.commit()
+    return jsonify({'message': 'Order created successfully'})
+
+if __name__ == '__main__':
+    app.run(debug=True)

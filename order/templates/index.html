@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Order</title>
+</head>
+<body>
+    <h1>Create Order</h1>
+    <form action="/orders" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required><br>
+        <input type="submit" value="Create Order">
+    </form>
+    <br>
+    <a href="/orders">View Orders</a>
+    <br>
+    <h1>Create Payment</h1>
+    <form action="/payments" method="post">
+        <label for="order_id">Order ID:</label>
+        <input type="number" id="order_id" name="order_id" required><br>
+        <label for="amount">Amount:</label>
+        <input type="number" step="0.01" id="amount" name="amount" required><br>
+        <input type="submit" value="Create Payment">
+    </form>
+    <br>
+    <a href="/payments">View Payments</a>
+</body>
+</html>
